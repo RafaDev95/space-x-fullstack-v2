@@ -10,6 +10,7 @@ ChartJS.register(ChartDataLabels)
 import { LaunchesOverallDetails } from '@/types'
 import { rocketColors } from '@/lib/rocketColors'
 import { mergeClassNames } from '@/lib/utils'
+import EmptyState from '../EmptyState'
 
 type Props = {
   overall: LaunchesOverallDetails | string
@@ -41,11 +42,7 @@ const PieChart = ({ overall }: Props) => {
   }, [overall])
 
   if (typeof overall === 'string') {
-    return (
-      <div className="flex h-full flex-1 items-center justify-center rounded-md bg-card p-3">
-        <p className=" text-red-500">{overall}</p>
-      </div>
-    )
+    return <EmptyState title={overall} />
   }
 
   const { successes, failures, rocketLaunchSummary } = overall

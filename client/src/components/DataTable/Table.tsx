@@ -47,6 +47,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
+
   const { querySearch } = useQueryStore()
   const { setIsLoading, isLoading } = useLoadingStore()
 

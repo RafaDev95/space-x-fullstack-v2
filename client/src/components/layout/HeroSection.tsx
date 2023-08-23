@@ -38,13 +38,19 @@ const HeroSection = ({ launches, overall, yearlyLaunches }: Props) => {
       </div>
       <SearchBar />
       <div className="mt-8">
-        <DataTable
-          columns={columns}
-          data={launches.results}
-          hasNextPage={launches.hasNextPage}
-          hasPrevPage={launches.hasPrevPage}
-          totalDocs={launches.totalDocs}
-        />
+        {typeof launches === 'string' ? (
+          <h1 className="mt-16 text-center text-2xl text-slate-200">
+            Nenhum resultado foi encontrado com esses parâmetros.
+          </h1>
+        ) : (
+          <DataTable
+            columns={columns}
+            data={launches.results}
+            hasNextPage={launches.hasNextPage}
+            hasPrevPage={launches.hasPrevPage}
+            totalDocs={launches.totalDocs}
+          />
+        )}
       </div>
     </main>
   )

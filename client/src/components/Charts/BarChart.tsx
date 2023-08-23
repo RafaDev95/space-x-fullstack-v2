@@ -22,13 +22,14 @@ ChartJS.register(
   ArcElement
 )
 
-import { RocketCounts, YearlyLaunchesDetails } from '@/types'
+import { YearlyLaunchesDetails } from '@/types'
 import { mergeClassNames } from '@/lib/utils'
 import { generateChartData } from '@/lib/generateChartData'
 import { accumulateRocketCounts } from '@/lib/accumulateRocketCounts'
+import EmptyState from '../EmptyState'
 
 type Props = {
-  yearlyLaunches: YearlyLaunchesDetails[]
+  yearlyLaunches: YearlyLaunchesDetails[] | string
 }
 
 const BarChart = ({ yearlyLaunches }: Props) => {
@@ -57,6 +58,11 @@ const BarChart = ({ yearlyLaunches }: Props) => {
       window.removeEventListener('resize', setMediumScreen)
     }
   }, [yearlyLaunches])
+
+  if (typeof yearlyLaunches === 'string') {
+    return <EmptyState title={yearlyLaunches} />
+  }
+
   const rocketCountsByYear = accumulateRocketCounts(yearlyLaunches)
 
   const chartData = generateChartData(rocketCountsByYear)
