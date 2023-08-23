@@ -57,6 +57,14 @@ export function calculatePagination(page: number, limit: number, totalItems: num
 export const calculateRocketUsageAndLaunchCounts = (yearlyLaunches: LaunchesDetails[]) => {
   const rocketLaunchSummary: RocketLaunchSummary = {}
 
+  const incrementRocketLaunchSummary = (rocketKey: string) => {
+    if (!rocketLaunchSummary[rocketKey]) {
+      rocketLaunchSummary[rocketKey] = 1
+    } else {
+      rocketLaunchSummary[rocketKey]++
+    }
+  }
+
   yearlyLaunches.forEach((launch) => {
     const rocketName = launch.rocket_data!.name
     const cores = launch.cores
@@ -64,13 +72,11 @@ export const calculateRocketUsageAndLaunchCounts = (yearlyLaunches: LaunchesDeta
     if (cores.length === 0) {
       // Rocket was used
       const rocketKey = `Used ${rocketName}`
-      if (!rocketLaunchSummary[rocketKey]) {
-        rocketLaunchSummary[rocketKey] = 1
-      } else {
-        rocketLaunchSummary[rocketKey]++
-      }
+      incrementRocketLaunchSummary(rocketKey)
     } else {
       cores.forEach((core) => {
+        // this || false was necessary because some of core.reused value is null
+        // and it was being ignored in the final calculation.
         const isReused = core.reused || false
         const isFalconNine = rocketName.includes('9')
         const rocketKey = isReused
@@ -79,11 +85,7 @@ export const calculateRocketUsageAndLaunchCounts = (yearlyLaunches: LaunchesDeta
           ? `New ${rocketName}`
           : rocketName
 
-        if (!rocketLaunchSummary[rocketKey]) {
-          rocketLaunchSummary[rocketKey] = 1
-        } else {
-          rocketLaunchSummary[rocketKey]++
-        }
+        incrementRocketLaunchSummary(rocketKey)
       })
     }
   })
