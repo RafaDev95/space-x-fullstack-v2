@@ -1,11 +1,9 @@
 import { Request, Response, Router } from 'express'
 
-import { Controller, RocketLaunchSummary } from '@/types'
-import { Prisma } from '@prisma/client'
+import { Controller } from '@/types'
 import prismadb from '@/lib/prismadb'
 import { calculateRocketUsageAndLaunchCounts } from './LaunchServices'
-
-type SmartWhere = Prisma.LaunchWhereInput & { OR?: Array<Prisma.LaunchWhereInput> }
+import { buildSmartWhere, calculatePagination } from './launchUtils'
 
 class LaunchController implements Controller {
   public path = '/launches'
@@ -26,42 +24,19 @@ class LaunchController implements Controller {
 
     try {
       const pageNumber = Number(page) || 1
-      const itemsPerPage = Number(limit) || 5
 
-      let smartWhere: SmartWhere = {}
-
-      if (search === 'true' || search === 'false') {
-        smartWhere.success = search === 'true'
-      } else if (search) {
-        smartWhere.OR = [
-          {
-            name: {
-              contains: (search as string).trim(),
-              mode: 'insensitive',
-            },
-          },
-          {
-            rocket_data: {
-              name: {
-                contains: (search as string).trim(),
-                mode: 'insensitive',
-              },
-            },
-          },
-        ]
-      }
+      const smartWhere = buildSmartWhere(String(search))
 
       const totalLaunches = await prismadb.launch.findMany({
         where: smartWhere,
       })
 
       const totalItems = totalLaunches.length
-      const totalPages = Math.ceil(totalItems / itemsPerPage)
-
-      const hasNextPage = pageNumber < totalPages
-      const hasPrevPage = pageNumber > 1
-
-      const offset = (pageNumber - 1) * itemsPerPage
+      const { itemsPerPage, totalPages, hasNextPage, hasPrevPage, offset } = calculatePagination(
+        pageNumber,
+        Number(limit),
+        totalItems
+      )
 
       const results = await prismadb.launch.findMany({
         skip: offset,
@@ -204,12 +179,11 @@ class LaunchController implements Controller {
       const rocketLaunchSummary: { [rocketName: string]: number } =
         calculateRocketUsageAndLaunchCounts(launchesDetails)
 
-      // res.json({
-      //   successes,
-      //   failures,
-      //   rocketLaunchSummary,
-      // })
-      res.status(400).json({ message: 'error' })
+      res.json({
+        successes,
+        failures,
+        rocketLaunchSummary,
+      })
     } catch (error) {
       res.status(400).json({
         message: 'Failed to retrieve launches details',

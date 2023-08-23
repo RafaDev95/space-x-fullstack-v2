@@ -1,6 +1,6 @@
 import 'dotenv/config'
 
-import launchController from '@/controllers/LaunchController'
+import launchController from '@/controllers/launcher/LaunchController'
 import App from './app'
 
 const PORT = process.env.PORT || 5000
