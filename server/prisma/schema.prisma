@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Rocket {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+
+  launchId String @db.ObjectId @unique
+  launch Launch? @relation(fields:[launchId], references: [id], onDelete: Cascade)
+
+}
+
+
+model Launch {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  success Boolean?
+  date_utc DateTime
+  date_unix Int
+  date_local DateTime
+  date_precision String
+  upcoming Boolean?
+  details String?
+  flight_number Int
+  name String
+  rocket String
+
+
+  cores Core []
+  links Links?
+  rocket_data Rocket?
+}
+
+model Links {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  webcast String?
+  patch Patch?
+
+
+  launchId String @db.ObjectId @unique
+  launch Launch? @relation(fields:[launchId], references: [id], onDelete: Cascade)
+  
+}
+
+
+
+model Patch {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  small String?
+  large String?
+
+
+  linkId String @db.ObjectId @unique
+  link Links @relation(fields:[linkId], references: [id], onDelete: Cascade)
+}
+
+
+model Core {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  reused Boolean?
+
+  launchId String @db.ObjectId @unique
+  launch Launch? @relation(fields:[launchId], references: [id], onDelete: Cascade)
+}

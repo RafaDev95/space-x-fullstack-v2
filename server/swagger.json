@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API sobre informações de lançamentos da Space X",
+    "description": "Esta api salva os dados fornecidos pela space x e retorna os lançamentos anuais, totais, seus foguetes, missão, resultado, logo e link para o vídeo no youtube.",
+    "contact": {
+      "name": "Support",
+      "email": "rafael-dev@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/launches": {
+      "get": {
+        "description": "Retorna todos o os lançamentos.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaunchResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No results found"
+          }
+        }
+      },
+
+      "parameters": [
+        {
+          "name": "search",
+          "in": "query",
+          "description": "Missão, foguete ou resultado",
+          "schema": {
+            "example": "heavy",
+            "type": "string"
+          },
+          "style": "simple"
+        }
+      ]
+    },
+    "/launches/stats/yearly": {
+      "get": {
+        "description": "Retorna todos o lançamentos anuais.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "example": {
+                  "year": 2022,
+                  "successes": 43,
+                  "failures": 15,
+                  "rocketLaunchSummary": {
+                    "Used Falcon 9": 41,
+                    "New Falcon 9": 15,
+                    "Falcon Heavy": 2
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/YearlyLaunchesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to retrieve yearly launches"
+          }
+        }
+      },
+
+      "parameters": [
+        {
+          "name": "year",
+          "in": "query",
+          "description": "Ano completo com quatro dígitos. Ex.: 2020",
+          "schema": {
+            "example": "2022",
+            "type": "string"
+          },
+          "style": "simple"
+        }
+      ]
+    },
+    "/launches/stats/overall": {
+      "get": {
+        "description": "Retorna os dados sobre todos os lançamentos.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverllResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to retrieve yearly launches"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LaunchResult": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "success": { "type": "boolean" },
+          "date_utc": { "type": "string", "format": "date-time" },
+          "date_unix": { "type": "integer" },
+          "date_local": { "type": "string", "format": "date-time" },
+          "date_precision": { "type": "string" },
+          "upcoming": { "type": "boolean" },
+          "details": { "type": "string" },
+          "flight_number": { "type": "integer" },
+          "name": { "type": "string" },
+          "rocket": { "type": "string" },
+          "links": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "webcast": { "type": "string", "format": "uri" },
+              "launchId": { "type": "string" },
+              "patch": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "small": { "type": "string", "format": "uri" },
+                  "large": { "type": "string", "format": "uri" },
+                  "linkId": { "type": "string" }
+                }
+              }
+            }
+          },
+          "rocket_data": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" }
+            }
+          },
+          "cores": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "flight": { "type": "integer" },
+                "reused": { "type": "boolean" },
+                "launchId": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "LaunchResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LaunchResult" }
+          },
+          "totalDocs": { "type": "integer" },
+          "page": { "type": "integer" },
+          "totalPages": { "type": "integer" },
+          "hasNextPage": { "type": "boolean" },
+          "hasPrevPage": { "type": "boolean" }
+        }
+      },
+      "OverllResponse": {
+        "type": "object",
+        "properties": {
+          "successes": { "type": "number" },
+          "failures": { "type": "number" },
+          "rocketLaunchSummary": {
+            "type": "object",
+            "properties": {
+              "rocketName": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "YearlyLaunchesResponse": {
+        "type": "object",
+        "properties": {
+          "year": { "type": "number" },
+          "successes": { "type": "number" },
+          "failures": { "type": "number" },
+          "rocketLaunchSummary": {
+            "type": "object",
+            "properties": {
+              "rocketName": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
