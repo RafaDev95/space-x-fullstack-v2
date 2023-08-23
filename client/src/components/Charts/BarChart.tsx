@@ -99,7 +99,11 @@ const BarChart = ({ yearlyLaunches }: Props) => {
       <h1 className="text-center text-xl font-semibold text-slate-200 md:text-2xl">
         Lançamentos por ano
       </h1>
-      <div className={cn('h-[210px] w-[250px] md:h-[424px]  md:w-full ')}>
+      <div
+        className={mergeClassNames(
+          'h-[210px] w-[250px] md:h-[424px]  md:w-full '
+        )}
+      >
         {isLoading ? (
           <div className="h-[210px] w-[250px] animate-pulse bg-gray-200 md:h-[288px] md:w-full" />
         ) : (
