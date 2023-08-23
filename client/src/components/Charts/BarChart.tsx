@@ -121,7 +121,7 @@ const BarChart = ({ yearlyLaunches }: Props) => {
     return () => {
       window.removeEventListener('resize', setMediumScreen)
     }
-  }, [])
+  }, [yearlyLaunches])
 
   const rocketCountsByYear = accumulateRocketCounts(yearlyLaunches)
   const chartData = generateChartData(rocketCountsByYear)
