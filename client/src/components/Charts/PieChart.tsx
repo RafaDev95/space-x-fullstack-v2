@@ -26,8 +26,8 @@ const PieChart = ({ overall }: Props) => {
 
   if (typeof overall === 'string') {
     return (
-      <div className="h-full flex-1 rounded-md bg-card p-3 ">
-        <p className="text-center text-red-500">{overall}</p>
+      <div className="flex h-full flex-1 items-center justify-center rounded-md bg-card p-3">
+        <p className=" text-red-500">{overall}</p>
       </div>
     )
   }

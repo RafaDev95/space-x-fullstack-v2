@@ -1,6 +1,6 @@
 import { LaunchesOverallDetails, LaunchesResponse } from '@/types'
 
-export const getLaunches = async (
+export const fetchLaunches = async (
   page = '1',
   limit = '5',
   search?: string
@@ -30,7 +30,7 @@ export const getLaunches = async (
   }
 }
 
-export const getOverallDetails = async (): Promise<
+export const fetchOverallDetails = async (): Promise<
   LaunchesOverallDetails | string
 > => {
   const res = await fetch(

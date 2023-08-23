@@ -1,4 +1,4 @@
-export const getYearlyLaunches = async (year?: string) => {
+export const fetchYearlyLaunches = async (year?: string) => {
   let query = ''
 
   try {

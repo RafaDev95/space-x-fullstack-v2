@@ -1,20 +1,20 @@
 import HeroSection from '@/components/layout/HeroSection'
-import { getLaunches, getOverallDetails } from './api/launches'
+import { fetchLaunches, fetchOverallDetails } from './api/launches'
 
-import { getYearlyLaunches } from './api/launches/cached/getYearlyLaunches'
+import { fetchYearlyLaunches } from './api/launches/cached/fetchYearlyLaunches'
 
 const HomePage = async ({
   searchParams,
 }: {
   searchParams: { page: string; search: string }
 }) => {
-  const launches = await getLaunches(
+  const launches = await fetchLaunches(
     searchParams.page,
     '5',
     searchParams.search
   )
-  const yearlyLaunches = await getYearlyLaunches()
-  const overallLaunchesDetails = await getOverallDetails()
+  const yearlyLaunches = await fetchYearlyLaunches()
+  const overallLaunchesDetails = await fetchOverallDetails()
 
   return (
     <HeroSection
