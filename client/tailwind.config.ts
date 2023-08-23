@@ -12,6 +12,7 @@ const config: Config = {
         bg: '#222629',
         card: '#474B4F',
         secondary: '#343A40',
+        'text-primary': '#e2e8f0',
       },
     },
   },

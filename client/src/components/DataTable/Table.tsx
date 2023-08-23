@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
   const page = searchParams.get('page') ?? '1'
 
   return (
-    <div className="rounde-md border bg-secondary p-4 text-slate-200">
+    <div className="rounde-md text-text-primary border bg-secondary p-4">
       <div className="border">
         <Table>
           <TableHeader>
@@ -110,7 +110,7 @@ export function DataTable<TData, TValue>({
         <p className="mr-4 italic underline">Mostrando 1-5 de {totalDocs}</p>
         <Button
           variant="outline"
-          className="w-[80px] hover:bg-slate-200 hover:text-gray-600"
+          className="hover:bg-text-primary w-[80px] hover:text-gray-600"
           size="sm"
           disabled={!hasPrevPage || isLoading}
           onClick={() => setIsLoading(true)}
@@ -124,7 +124,7 @@ export function DataTable<TData, TValue>({
         </Button>
         <Button
           variant="outline"
-          className="w-[80px] hover:bg-slate-200 hover:text-gray-600"
+          className="hover:bg-text-primary w-[80px] hover:text-gray-600"
           size="sm"
           disabled={!hasNextPage || isLoading}
           onClick={() => setIsLoading(true)}

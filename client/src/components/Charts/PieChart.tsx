@@ -64,7 +64,7 @@ const PieChart = ({ overall }: Props) => {
 
   return (
     <div className="h-full flex-1 rounded-md bg-card p-3 ">
-      <h1 className="text-center text-xl font-semibold text-slate-200 md:text-2xl">
+      <h1 className="text-text-primarymd:text-2xl text-center text-xl font-semibold">
         Lançamentos de foguetes
       </h1>
 
@@ -73,7 +73,7 @@ const PieChart = ({ overall }: Props) => {
           <ul className="">
             {rocketNames?.map((rocketName) => (
               <li
-                className="mt-1 flex w-full items-center gap-x-4 text-slate-200 md:text-sm"
+                className="text-text-primarymd:text-sm mt-1 flex w-full items-center gap-x-4"
                 key={rocketName}
               >
                 <div
@@ -87,7 +87,7 @@ const PieChart = ({ overall }: Props) => {
               </li>
             ))}
           </ul>
-          <div className="text-slate-200">
+          <div className="text-text-primary">
             <h2 className="mb-2 font-bold">Resultado de lançamentos:</h2>
             <p>
               Sucesso:{' '}

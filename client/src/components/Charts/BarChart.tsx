@@ -102,7 +102,7 @@ const BarChart = ({ yearlyLaunches }: Props) => {
         'flex-1 rounded-md bg-card p-3 md:h-[390px] lg:h-full'
       )}
     >
-      <h1 className="text-center text-xl font-semibold text-slate-200 md:text-2xl">
+      <h1 className="text-text-primary text-center text-xl font-semibold md:text-2xl">
         Lançamentos por ano
       </h1>
       <div

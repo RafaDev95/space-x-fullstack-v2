@@ -78,7 +78,7 @@ const SearchBar = () => {
       <Button
         onClick={handleSubmit(handleSearch)}
         disabled={isLoading || !validationResult.success}
-        className="absolute right-0 top-0 rounded-none rounded-br-md rounded-tr-md p-3 hover:bg-card hover:text-slate-200 active:scale-95"
+        className="hover:text-text-primary absolute right-0 top-0 rounded-none rounded-br-md rounded-tr-md p-3 hover:bg-card active:scale-95"
       >
         <Search />
       </Button>

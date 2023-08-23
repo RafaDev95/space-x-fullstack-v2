@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav className="flex w-full flex-col items-center space-y-2 px-4 md:flex-row md:justify-between md:space-y-0">
         <Logo />
 
-        <p className="italic text-slate-200">
+        <p className="text-text-primary italic">
           Data Source:{' '}
           <NextLink
             href="https://github.com/r-spacex/SpaceX-API"

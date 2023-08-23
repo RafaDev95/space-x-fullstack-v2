@@ -13,7 +13,7 @@ const Logo = () => {
           className="object-contain"
         />
       </div>
-      <h1 className="text-xl font-semibold text-slate-200 md:text-2xl">
+      <h1 className="text-text-primary text-xl font-semibold md:text-2xl">
         Space X
       </h1>
     </div>

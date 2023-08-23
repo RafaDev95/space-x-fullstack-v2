@@ -55,7 +55,7 @@ const columns: ColumnDef<Result>[] = [
       return (
         <p
           className={mergeClassNames(
-            'w-fit rounded-md p-1 font-semibold text-slate-200',
+            'text-text-primary w-fit rounded-md p-1 font-semibold',
             wasSuccess ? 'bg-green-700' : 'bg-red-700'
           )}
         >

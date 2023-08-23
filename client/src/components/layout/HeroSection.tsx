@@ -39,7 +39,7 @@ const HeroSection = ({ launches, overall, yearlyLaunches }: Props) => {
       <SearchBar />
       <div className="mt-8">
         {typeof launches === 'string' ? (
-          <h1 className="mt-16 text-center text-2xl text-slate-200">
+          <h1 className="text-text-primary mt-16 text-center text-2xl">
             Nenhum resultado foi encontrado com esses parâmetros.
           </h1>
         ) : (
