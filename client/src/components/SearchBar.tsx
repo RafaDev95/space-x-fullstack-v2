@@ -13,7 +13,7 @@ import { Input } from './ui/input'
 const SearchBar = () => {
   const [title, setTitle] = useState('')
 
-  const { setSearch } = useQueryStore()
+  const { setQuerySearch } = useQueryStore()
   const { isLoading, setIsLoading } = useLoadingStore()
 
   const router = useRouter()
@@ -29,7 +29,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     handleSearch(title)
-    setSearch(title)
+    setQuerySearch(title)
   }, [title])
   return (
     <Input

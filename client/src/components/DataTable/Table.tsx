@@ -47,7 +47,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
-  const { search } = useQueryStore()
+  const { querySearch } = useQueryStore()
   const { setIsLoading, isLoading } = useLoadingStore()
 
   const searchParams = useSearchParams()
@@ -116,7 +116,7 @@ export function DataTable<TData, TValue>({
         >
           <NextLink
             scroll={false}
-            href={`?page=${Number(page) - 1}&search=${search}`}
+            href={`?page=${Number(page) - 1}&search=${querySearch}`}
           >
             {isLoading ? <Spinner /> : 'Anterior'}
           </NextLink>
@@ -130,7 +130,7 @@ export function DataTable<TData, TValue>({
         >
           <NextLink
             scroll={false}
-            href={`?page=${Number(page) + 1}&search=${search}`}
+            href={`?page=${Number(page) + 1}&search=${querySearch}`}
           >
             {isLoading ? <Spinner /> : 'Próxima'}
           </NextLink>

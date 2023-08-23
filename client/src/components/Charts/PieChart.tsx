@@ -15,6 +15,22 @@ type Props = {
   overall: LaunchesOverallDetails | string
 }
 
+const options: ChartOptions<'pie'> = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+
+    datalabels: {
+      color: '#e2e8f0',
+      font: {
+        weight: 'bold',
+        size: 15,
+      },
+    },
+  },
+}
+
 const PieChart = ({ overall }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -47,22 +63,6 @@ const PieChart = ({ overall }: Props) => {
         ),
       },
     ],
-  }
-
-  const options: ChartOptions<'pie'> = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-      datalabels: {
-        color: '#e2e8f0',
-        font: {
-          weight: 'bold',
-          size: 15,
-        },
-      },
-    },
   }
 
   return (

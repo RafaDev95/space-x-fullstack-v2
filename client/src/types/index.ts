@@ -64,3 +64,9 @@ export interface RocketLaunchSummary {
   rocketName: string
   count: number
 }
+
+export interface RocketCounts {
+  [year: number]: {
+    [rocketName: string]: number
+  }
+}

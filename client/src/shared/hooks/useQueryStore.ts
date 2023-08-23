@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 type State = {
-  search: string
-  setSearch: (search: string) => void
+  querySearch: string
+  setQuerySearch: (querySearch: string) => void
 }
 
 const useQueryStore = create<State>((set) => ({
-  search: '',
-  setSearch: (search) => set({ search }),
+  querySearch: '',
+  setQuerySearch: (querySearch) => set({ querySearch }),
 }))
 
 export default useQueryStore

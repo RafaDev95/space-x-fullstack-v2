@@ -8,6 +8,10 @@ import { Result } from '@/types'
 import { convertDate } from '@/lib/convertDateToBrazilianFormat'
 import { cn } from '@/lib/utils'
 
+// About the snake_case in the acessorKey field:
+// It's necessary to be this way due to the structure of data being recieved.
+// This field must be the same as the data field name.
+// Example: result[0].flight_number. Due to the acessorKey had the same field name, it'll show the value that field.
 const columns: ColumnDef<Result>[] = [
   {
     accessorKey: 'flight_number',
