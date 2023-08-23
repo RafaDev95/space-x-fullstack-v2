@@ -2,8 +2,11 @@ import { Request, Response, Router } from 'express'
 
 import { Controller } from '@/types'
 import prismadb from '@/lib/prismadb'
-import { calculateRocketUsageAndLaunchCounts } from './LaunchServices'
-import { buildSmartWhere, calculatePagination } from './launchUtils'
+import {
+  buildSmartWhere,
+  calculatePagination,
+  calculateRocketUsageAndLaunchCounts,
+} from './launchUtils'
 
 class LaunchController implements Controller {
   public path = '/launches'
