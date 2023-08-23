@@ -20,12 +20,12 @@ type Props = {
 }
 
 const HeroSection = ({ launches, overall, yearlyLaunches }: Props) => {
-  const { search } = useQueryStore()
+  const { querySearch } = useQueryStore()
   const { setIsLoading } = useLoadingStore()
 
   useEffect(() => {
     setIsLoading(false)
-  }, [launches, search])
+  }, [launches, querySearch])
 
   return (
     <main className="mt-8 p-6">
