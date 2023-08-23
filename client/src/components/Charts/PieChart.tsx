@@ -9,7 +9,7 @@ ChartJS.register(ChartDataLabels)
 
 import { LaunchesOverallDetails } from '@/types'
 import { rocketColors } from '@/lib/rocketColors'
-import { cn } from '@/lib/utils'
+import { mergeClassNames } from '@/lib/utils'
 
 type Props = {
   overall: LaunchesOverallDetails | string
@@ -106,7 +106,7 @@ const PieChart = ({ overall }: Props) => {
             </p>
           </div>
         </div>
-        <div className={cn('w-[200px] lg:w-[200px] xl:w-[300px]')}>
+        <div className={mergeClassNames('w-[200px] lg:w-[200px] xl:w-[300px]')}>
           {isLoading ? (
             <div
               className="h-[200px] w-[200px] animate-pulse rounded-full

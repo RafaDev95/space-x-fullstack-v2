@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import { Result } from '@/types'
 import { convertDate } from '@/lib/convertDateToBrazilianFormat'
-import { cn } from '@/lib/utils'
+import { mergeClassNames } from '@/lib/utils'
 
 // About the snake_case in the acessorKey field:
 // It's necessary to be this way due to the structure of data being recieved.
@@ -54,7 +54,7 @@ const columns: ColumnDef<Result>[] = [
 
       return (
         <p
-          className={cn(
+          className={mergeClassNames(
             'w-fit rounded-md p-1 font-semibold text-slate-200',
             wasSuccess ? 'bg-green-700' : 'bg-red-700'
           )}

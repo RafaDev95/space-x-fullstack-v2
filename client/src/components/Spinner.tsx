@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { mergeClassNames } from '@/lib/utils'
 import { PuffLoader } from 'react-spinners'
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const Spinner = ({ size = 40, className, color = 'white' }: Props) => {
   return (
     <div
-      className={cn(
+      className={mergeClassNames(
         'flex h-full w-full items-center justify-center',
         className
       )}

@@ -23,7 +23,7 @@ ChartJS.register(
 )
 
 import { RocketCounts, YearlyLaunchesDetails } from '@/types'
-import { cn } from '@/lib/utils'
+import { mergeClassNames } from '@/lib/utils'
 import { generateChartData } from '@/lib/generateChartData'
 import { accumulateRocketCounts } from '@/lib/accumulateRocketCounts'
 
@@ -91,7 +91,11 @@ const BarChart = ({ yearlyLaunches }: Props) => {
   }
 
   return (
-    <div className={cn('flex-1 rounded-md bg-card p-3 md:h-[390px] lg:h-full')}>
+    <div
+      className={mergeClassNames(
+        'flex-1 rounded-md bg-card p-3 md:h-[390px] lg:h-full'
+      )}
+    >
       <h1 className="text-center text-xl font-semibold text-slate-200 md:text-2xl">
         Lançamentos por ano
       </h1>
