@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
+import { getRocketData } from './getRocketData'
 import prismadb from './lib/prismadb'
-import { LaunchFromSpaceX, RocketFromSpaceX } from './types/spacex'
+import { LaunchFromSpaceX } from './types/spacex'
 
 const prisma = prismadb
 
@@ -10,14 +11,6 @@ export const getAndSaveSpaceXData = async () => {
       'https://api.spacexdata.com/v5/launches'
     )
     const launches = launchesResponse.data
-
-    const getRocketData = async (rocketId: string) => {
-      const rocketData: AxiosResponse<RocketFromSpaceX> = await axios.get(
-        `https://api.spacexdata.com/v4/rockets/${rocketId}`
-      )
-
-      return rocketData.data
-    }
 
     for (const launch of launches) {
       const existingLaunch = await prisma.launch.findFirst({
